@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Category index{% endblock %}
+
+{% block body %}
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">Catégories</a>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav">
+                        {% for category in categories %}
+                            <ul class="navbar-nav">
+                                <li class="nav-item active"> <a class="nav-link" href="{{ path('category_show', {'id': category.id}) }}">Montrer catégorie {{ category.id }}</a></li>
+                                <li class="nav-item"> <a class="nav-link" href="{{ path('category_edit', {'id': category.id}) }}">Editer catégorie {{ category.id }}</a></li>
+                        {% endfor %}
+                                <li class="nav-item"> <a class="nav-link" href="{{ path('category_new') }}">Nouvel catégorie</a></li>
+                            </ul>
+                    </div>
+                </div>
+        </nav>    
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for category in categories %}
+            <tr>
+                <td>{{ category.id }}</td>
+                <td>{{ category.name }}</td>
+                <td>
+                    <a href="{{ path('category_show', {'id': category.id}) }}">show</a>
+                    <a href="{{ path('category_edit', {'id': category.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
